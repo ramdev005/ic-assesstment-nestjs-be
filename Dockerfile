@@ -16,6 +16,23 @@ RUN pnpm install --frozen-lockfile
 # Copy source code
 COPY . .
 
+# Accept environment variables at build time and expose to the build process
+ARG NODE_ENV=production
+ARG PORT=3000
+ARG API_PREFIX=api/v1
+ARG MONGODB_URI
+ARG CORS_ORIGIN
+ARG JWT_SECRET
+ARG API_RATE_LIMIT=100
+
+ENV NODE_ENV=${NODE_ENV}
+ENV PORT=${PORT}
+ENV API_PREFIX=${API_PREFIX}
+ENV MONGODB_URI=${MONGODB_URI}
+ENV CORS_ORIGIN=${CORS_ORIGIN}
+ENV JWT_SECRET=${JWT_SECRET}
+ENV API_RATE_LIMIT=${API_RATE_LIMIT}
+
 # Build the application
 RUN pnpm run build
 
